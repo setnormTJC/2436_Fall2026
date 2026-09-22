@@ -39,8 +39,9 @@ std::string MyStack::top()
 }
 
 MyStack::MyStack() = default;
-bool StackApplications::isBalanced(const std::string &expression)
 
+
+bool StackApplications::isBalanced(const std::string &expression)
 {
     std::stack<char> stackOfOpenParentheses;
 
@@ -49,15 +50,20 @@ bool StackApplications::isBalanced(const std::string &expression)
         if (expression[i] == '(')
             stackOfOpenParentheses.push(expression[i]);
 
-        else if (expression[i] == ')') //mutually exclusive
+        else if (expression[i] == ')')
         {
-            if (stackOfOpenParentheses.empty() == false)
+            if (!stackOfOpenParentheses.empty()) //don't attempt to pop an empty stack
             {
                 stackOfOpenParentheses.pop();
+            }
+
+            else //the stack is empty and we just encountered a close parenthesis!
+                    //ex: 5 + 2)/3 ! -> unbalanced!
+            {
+                return false;
             }
         }
     }
 
     return (stackOfOpenParentheses.empty());
-
 }
