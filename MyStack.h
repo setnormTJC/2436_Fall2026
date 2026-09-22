@@ -5,6 +5,7 @@
 #ifndef INC_2436_FALL2026_MYSTACK_H
 #define INC_2436_FALL2026_MYSTACK_H
 #include <string>
+#include <vector>
 
 
 // template<typename T>
@@ -30,6 +31,13 @@ public:
     MyStack();
 };
 
+namespace StackApplications
+{
 
+    ///@param -> expression cannot contain {, [ as grouping symbols -> ONLY parentheses are allowed!
+    bool isBalanced(const std::string& expression);
+
+    void solveMaze(std::vector<std::vector<char>>& theMaze);
+}
 
 #endif //INC_2436_FALL2026_MYSTACK_H

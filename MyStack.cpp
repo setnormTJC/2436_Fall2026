@@ -4,6 +4,7 @@
 
 #include "MyStack.h"
 
+#include<stack>
 #include <stdexcept>
 
 void MyStack::push(const std::string &newItem)
@@ -38,3 +39,25 @@ std::string MyStack::top()
 }
 
 MyStack::MyStack() = default;
+bool StackApplications::isBalanced(const std::string &expression)
+
+{
+    std::stack<char> stackOfOpenParentheses;
+
+    for (int i = 0; i < expression.size(); ++i)
+    {
+        if (expression[i] == '(')
+            stackOfOpenParentheses.push(expression[i]);
+
+        else if (expression[i] == ')') //mutually exclusive
+        {
+            if (stackOfOpenParentheses.empty() == false)
+            {
+                stackOfOpenParentheses.pop();
+            }
+        }
+    }
+
+    return (stackOfOpenParentheses.empty());
+
+}

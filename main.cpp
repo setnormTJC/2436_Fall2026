@@ -7,23 +7,23 @@ int main()
 {
     try
     {
-        //pop -> might throw
-        MyStack myStack;
-        // myStack.pop();
+        // int someArithmeticResult = (6 *7)/54;
+        std::string someUnbalancedExpression = "((5 + 2)/4))";
 
-        myStack.push("Alice"); //increased topIndex from -1 (init empty) to 0
-        myStack.push("Bob"); //increased topIndex to 1
-        myStack.push("Carol"); //topIndex became 2
-        myStack.push("Darth"); //topIndex became 3
-        myStack.push("Eve");
+        std::string theExpressionToCheckForBalance = someUnbalancedExpression;
 
-        // myStack.push("Frank");
+        if (StackApplications::isBalanced(theExpressionToCheckForBalance))
+        {
+            std::cout << "The expression " << theExpressionToCheckForBalance << " IS balanced\n";
+        }
 
-        myStack.pop();
+        else
+        {
+            std::cout << theExpressionToCheckForBalance << " is NOT balanced :(\n";
+        }
 
-        std::cout << myStack.top() << "\n";
 
-        //check for "balanced expression" (apply the stack data structure)
+
     }
 
     catch (const std::exception& e)
