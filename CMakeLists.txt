@@ -31,7 +31,9 @@ endif()
 
 add_executable(2436_Fall2026 main.cpp
         MyStack.cpp
-        MyStack.h)
+        MyStack.h
+        LinkedList.cpp
+        LinkedList.h)
 
 target_link_libraries(2436_Fall2026
     2436
