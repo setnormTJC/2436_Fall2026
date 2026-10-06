@@ -1,42 +1,27 @@
 #include <iostream>
 
+#include "LinkedList.h"
 #include "MyStack.h"
 
 
 int main()
 {
-    try
-    {
-        // int someArithmeticResult = (6 *7)/54); //how is this checked?
+    //demoUsefulnessOfPointer();
 
-        std::string unbalancedExpression1 = "((1 + 2)/3))"; //has an extra close )
-        std::string unbalancedExpression2 = "((1 + 2)/3"; //has an extra open (
-        std::string unbalancedExpression3 = "1 + 2)/3(";
+    // demoStupidPointerLeak();
 
-        std::string balancedExpression1 =   "((1 + 2)/3)";
-        std::string balancedExpression2 = "(1 + 2) * (3 + 4)";
-        std::string balancedExpression3 = "";
-
-        std::string theExpressionToCheckForBalance = unbalancedExpression3;
-
-        if (StackApplications::isBalanced(theExpressionToCheckForBalance))
-        {
-            std::cout << "The expression " << theExpressionToCheckForBalance << " IS balanced\n";
-        }
-
-        else
-        {
-            std::cout << theExpressionToCheckForBalance << " is NOT balanced :(\n";
-        }
+    // demoSmartPointerPreventingLeak();
 
 
 
-    }
 
-    catch (const std::exception& e)
-    {
-        std::cerr << e.what() << "\n";
-    }
+    //second.pNext = nullptr; //nullptr is the "special" memory address:: 0x0000'0000'0000'0000
+
+    //head.setPNext(std::move(pSecondNode));
+
+
+    //link the head node to the second node:
+    //head.pNext = second;
 
     return 0;
 }
