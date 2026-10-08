@@ -3,25 +3,19 @@
 #include "LinkedList.h"
 #include "MyStack.h"
 
+#include<string>
 
 int main()
 {
-    //demoUsefulnessOfPointer();
+    Node* pHead = new Node(97, nullptr);
 
-    // demoStupidPointerLeak();
+    Node* pSecond = new Node(98, nullptr); //0x123...
 
-    // demoSmartPointerPreventingLeak();
+    pHead->pNext = pSecond;
 
-
-
-
-    //second.pNext = nullptr; //nullptr is the "special" memory address:: 0x0000'0000'0000'0000
-
-    //head.setPNext(std::move(pSecondNode));
-
-
-    //link the head node to the second node:
-    //head.pNext = second;
+    std::cout << "pHead is: " << pHead << std::endl;
+    std::cout << "pHead->data is: " << pHead->data << std::endl;
+    //std::cout << pHead->pSecond << std::endl; //(intentional) ERROR
 
     return 0;
 }

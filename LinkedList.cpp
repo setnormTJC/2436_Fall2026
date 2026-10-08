@@ -6,12 +6,60 @@
 
 #include <iostream>
 
-Node::Node(int data)
+
+Node::Node() = default; //what does this do? (it sets pointers to nullptr 0x000...000 (16 zeros if in 64 bit app)
+Node::Node(int dataOfInterest, Node *pNext)
+    :
+data(dataOfInterest),
+pNext(pNext)
+{
+
+}
+
+//initializes integers to 0 (and bools to false, etc.)
+
+
+SmartPointerNode::SmartPointerNode() = default;
+SmartPointerNode::SmartPointerNode(int data)
     :
 data(data)
 {
 }
 
+SinglyLinkedList::SinglyLinkedList() = default; //default sets pHead to nullptr
+
+SinglyLinkedList::SinglyLinkedList(int dataInHeadNode)
+{
+    pHead = std::make_unique<SmartPointerNode>(dataInHeadNode); //what does make_unique do?
+}
+
+void SinglyLinkedList::pushFront(int newData)
+{
+    std::unique_ptr<SmartPointerNode> pNew = std::make_unique<SmartPointerNode>(newData);
+
+    pNew->pNext = std::move(pHead); //std::move is a "price" you pay in exchange for no memory leaks
+
+    pHead = std::move(pNew);
+}
+
+void SinglyLinkedList::traverse() const
+{
+    //std::unique_ptr<Node> pCurrent = std::move(pHead); //illegal -> attempting to use deleted copy const. of unique_ptr
+    //recall: pHead is the sole member variable of SinglyLinkedList and is of type std::unique_ptr<Node>
+
+    //use a raw pointer here:
+    SmartPointerNode* pCurrent = pHead.get();
+
+    while (pCurrent != nullptr)
+    {
+        std::cout << pCurrent->data << std::endl;
+        pCurrent = pCurrent->pNext.get();
+    }
+}
+
+
+
+#pragma region Demos //enables "code folding"
 void demoSmartPointerPreventingLeak()
 {
     while (true)
@@ -73,3 +121,5 @@ void demoUsefulnessOfPointer()
     delete [] pointerToFirstElementInList; //this prevents a memory leak when raw pointer is used
 
 }
+
+#pragma endregion

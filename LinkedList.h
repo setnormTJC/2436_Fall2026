@@ -13,35 +13,65 @@ class Car
 {
     std::string make = "Ford";
     int mileCount = 123'456;
+    //Car someCar; //no good
+};
+
+///@brief This is a "self-referential" class
+class Node
+{
+    //private:
+public:
+    int data = 0;
+    Node* pNext = nullptr; //a node is defined in terms of itself
+
+    friend class LinkedList; //recall from last semester -> friends can modify and read PRIVATE member variables
+
+public:
+    Node();
+    Node(int dataOfInterest, Node* pNext);
 };
 
 
 ///@brief This is a SINGLY-linked node (not a doubly-linked node)
-class Node
+class SmartPointerNode
 {
-    int data; //let's be brief with the variable name here (this is dataOfInterest)
+    int data = 0; //let's be brief with the variable name here (this is dataOfInterest)
 
     //the "dumb", leaky way:
     // Node* pNext; //the address of the next node in the list
 
     //impossible to leak memory (skyrocket RAM usage)
-    std::unique_ptr<Node> pNext;
+    std::unique_ptr<SmartPointerNode> pNext;
 
 public:
-    Node(int data);
+    SmartPointerNode();
+    SmartPointerNode(int data);
 
+    friend class SinglyLinkedList;  //note this!
 };
 
-class LinkedList
+///@brief "doubly" and "circularly"-linked lists also exist
+class SinglyLinkedList
 {
+    std::unique_ptr<SmartPointerNode> pHead; //the only member variable we need for a singly-linked list
+public:
+    SinglyLinkedList();
+    SinglyLinkedList(int dataInHeadNode);
 
+    ///@brief inserts a new node at the front of the list<br>
+    ///modifies pHead (the sole member variable of this class)
+    void pushFront(int newData);
+
+    ///@brief AKA: print data in all nodes
+    void traverse () const;
 };
+
+
 
 void demoSmartPointerPreventingLeak();
 
 ///@brief also called a "naked" or "raw" pointer
 void demoStupidPointerLeak();
-
 
 ///@brief note that this uses a raw pointer (because smart pointer's notation looks a bit goofy in this case)
 void demoUsefulnessOfPointer();
