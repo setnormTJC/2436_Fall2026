@@ -16,6 +16,52 @@ pNext(pNext)
 
 }
 
+LinkedList::LinkedList() = default; //what does this do? It initializes pHead to nullptr
+
+LinkedList::LinkedList(int dataInTheHeadNode)
+{
+    pHead = new Node(dataInTheHeadNode, nullptr);
+}
+
+void LinkedList::pushFront(int newData)
+{
+    Node* pNew = new Node(newData, nullptr);
+
+    pNew->pNext = pHead;
+    pHead = pNew;
+
+
+}
+
+void LinkedList::traverse() const
+{
+    //for an array:
+    //for (int index = 0; index < arrayName.size(); ++index)
+    //print arrayName[index]
+
+    // if (pHead == nullptr) //safety check
+    // {
+    //     std::cout << "The list is EMPTY! Cannot traverse an empty list!" << std::endl;
+    //     return; //early return (prevents dereferencing the nullptr)
+    // }
+
+    Node* pCurrent = pHead;
+
+    while (pCurrent != nullptr)
+    {
+        std::cout << "contents of current node are: " << (char)pCurrent->data << std::endl;
+        //advance
+        pCurrent = pCurrent->pNext; //step forward (analogous to index = index + 1 in array traversal algo)
+    }
+
+}
+
+class Queue
+{
+private:
+    LinkedList linkedList; //why use a linked list? BECAUSE "fast" (O(1)) insertion at ... we'll talk about
+};
+
 //initializes integers to 0 (and bools to false, etc.)
 
 
@@ -26,14 +72,14 @@ data(data)
 {
 }
 
-SinglyLinkedList::SinglyLinkedList() = default; //default sets pHead to nullptr
+SmartLinkedList::SmartLinkedList() = default; //default sets pHead to nullptr
 
-SinglyLinkedList::SinglyLinkedList(int dataInHeadNode)
+SmartLinkedList::SmartLinkedList(int dataInHeadNode)
 {
     pHead = std::make_unique<SmartPointerNode>(dataInHeadNode); //what does make_unique do?
 }
 
-void SinglyLinkedList::pushFront(int newData)
+void SmartLinkedList::pushFront(int newData)
 {
     std::unique_ptr<SmartPointerNode> pNew = std::make_unique<SmartPointerNode>(newData);
 
@@ -42,7 +88,42 @@ void SinglyLinkedList::pushFront(int newData)
     pHead = std::move(pNew);
 }
 
-void SinglyLinkedList::traverse() const
+void SmartLinkedList::popFront()
+{
+    //safety check (avoid dereferencing nullptr (pHead->pNext) below):
+    if (pHead == nullptr)
+    {
+        //optional print statement - or throw exception (sort of a silent failure if not included)
+        return;
+    }
+
+    pHead = std::move(pHead->pNext);
+}
+
+///@brief O(N) complexity - implemented for the sake of queue (insert in rear)
+void SmartLinkedList::pushBack(int newData)
+{
+    if (pHead == nullptr) //what if the list is empty? Without this if, nullptr gets dereferenced below
+    {
+        pushFront(newData);
+        return; //go no further
+    }
+
+    SmartPointerNode* pCurrent = pHead.get();
+
+    //move pCurrent along until we get to the end of the list
+    while (pCurrent->pNext != nullptr) //caution! what happens here if the list is empty?
+    {
+        pCurrent = pCurrent->pNext.get();
+    }
+
+    //make new node and update pCurrent's pNext to pNew
+    std::unique_ptr<SmartPointerNode> pNew = std::make_unique<SmartPointerNode>(newData);
+
+    pCurrent->pNext = std::move(pNew);
+}
+
+void SmartLinkedList::traverse() const
 {
     //std::unique_ptr<Node> pCurrent = std::move(pHead); //illegal -> attempting to use deleted copy const. of unique_ptr
     //recall: pHead is the sole member variable of SinglyLinkedList and is of type std::unique_ptr<Node>

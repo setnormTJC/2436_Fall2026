@@ -31,6 +31,23 @@ public:
     Node(int dataOfInterest, Node* pNext);
 };
 
+///@brief Nota bene: for simplicity, this uses raw pointers, new operator, and has memory leaks
+class LinkedList
+{
+    //let's fill this up with member variable (single)
+    //and functions (ex: traverse, insert, etc.)
+private:
+    Node* pHead = nullptr;
+    //why not also store pTail?
+
+public:
+    LinkedList();
+    LinkedList(int dataInTheHeadNode);
+
+    void pushFront(int newData);
+
+    void traverse() const; //mark as constant because pHead will NOT be changed by this algo.
+};
 
 ///@brief This is a SINGLY-linked node (not a doubly-linked node)
 class SmartPointerNode
@@ -47,20 +64,24 @@ public:
     SmartPointerNode();
     SmartPointerNode(int data);
 
-    friend class SinglyLinkedList;  //note this!
+    friend class SmartLinkedList;  //note this!
 };
 
 ///@brief "doubly" and "circularly"-linked lists also exist
-class SinglyLinkedList
+class SmartLinkedList
 {
     std::unique_ptr<SmartPointerNode> pHead; //the only member variable we need for a singly-linked list
 public:
-    SinglyLinkedList();
-    SinglyLinkedList(int dataInHeadNode);
+    SmartLinkedList();
+    SmartLinkedList(int dataInHeadNode);
 
     ///@brief inserts a new node at the front of the list<br>
     ///modifies pHead (the sole member variable of this class)
     void pushFront(int newData);
+
+    void popFront();
+
+    void pushBack(int newData);
 
     ///@brief AKA: print data in all nodes
     void traverse () const;
