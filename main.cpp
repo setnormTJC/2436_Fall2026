@@ -2,9 +2,10 @@
 
 #include "LinkedList.h"
 #include "MyStack.h"
-//#include<>
 #include"cmake-build-debug/_deps/raylib-build/raylib/include/raylib.h"
 #include<string>
+#include<chrono>
+#include<thread>
 
 void answerLinkedListQuizQuestions()
 {
@@ -40,8 +41,9 @@ void answerLinkedListQuizQuestions()
 
 int main()
 {
-    LinkedList linkedList(99); //'c' = 99
 
+    //LinkedList linkedList(99); //'c' = 99
+    LinkedList linkedList;
 
     linkedList.pushBack(100);
 

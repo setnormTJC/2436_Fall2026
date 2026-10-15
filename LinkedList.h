@@ -46,14 +46,19 @@ public:
     LinkedList();
     LinkedList(int dataInTheHeadNode);
 
-    ///@brief inserts newData into the HEAD node of the list
+    ///@brief inserts newData into the HEAD node of the list <br>
+    ///complexity is O(1)
     void pushFront(int newData);
-    ///@brief insert newData into the REAR/TAIL node of the list
+
+    ///@brief insert newData into the REAR/TAIL node of the list<br>
+    ///complexity is O(1)
     void pushBack(int newData);
 
-    ///@brief (single-ended) queue needs popFront (FIFO)
-    void popFront(); //remove first element from queue
+    ///@brief (single-ended) queue needs popFront (FIFO)<br>
+    ///complexity is O(1)
+    void popFront();
 
+    ///complexity is O(N)
     void traverse() const; //mark as constant because pHead will NOT be changed by this algo.
 
 };

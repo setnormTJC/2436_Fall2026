@@ -49,45 +49,37 @@ void LinkedList::pushBack(int newData)
 {
     Node* pNew = new Node(newData, nullptr);
 
+    if (pHead == nullptr)
+    {
+        pHead = pNew;
+        pTail = pNew;
+        return;
+    }
+
     pTail->pNext = pNew;
 
     pTail = pNew;
 
-    // if (pHead == nullptr) //what if the list is empty? Without this if, nullptr gets dereferenced below
-    // {
-    //     pushFront(newData);
-    //     return; //go no further (Gandalf you shall not pass)
-    // }
-    //
-    // Node* pCurrent = pHead;
-    //
-    // //move pCurrent along until we get to the end of the list
-    // while (pCurrent->pNext != nullptr) //caution! what happens here if the list is empty?
-    // {
-    //     pCurrent = pCurrent->pNext; //analogous to ++i for array traversal
-    // }
-    //
-    // //make new node and update pCurrent's pNext to pNew
-    // Node* pNew = new Node(newData, nullptr);
-    //
-    // pCurrent->pNext = pNew;
 }
 
 void LinkedList::popFront()
 {
+    //NOTA BENE: since we are using raw pointers and the NEW operator, delete should be used here
+    //(but isn't for the sake of "simplicity")
     if (pHead == nullptr)
     {
         std::cout << "Cannot pop empty list!" << std::endl;
         return;
     }
 
-    pHead = pHead->pNext;
-
-    //Should pTail be updated? What if pHead is the ONLY node in the list now?
+    //Should pTail be updated? What if pHead is the ONLY node in the list when this function is called?
     if (pHead->pNext == nullptr)
     {
-        pTail = pHead; //is this necessary?
+        pTail = nullptr;
     }
+
+    pHead = pHead->pNext;
+
 }
 
 void LinkedList::traverse() const
@@ -95,12 +87,6 @@ void LinkedList::traverse() const
     //for an array:
     //for (int index = 0; index < arrayName.size(); ++index)
     //print arrayName[index]
-
-    // if (pHead == nullptr) //safety check
-    // {
-    //     std::cout << "The list is EMPTY! Cannot traverse an empty list!" << std::endl;
-    //     return; //early return (prevents dereferencing the nullptr)
-    // }
 
     Node* pCurrent = pHead;
 
