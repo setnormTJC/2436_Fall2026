@@ -23,16 +23,26 @@ LinkedList::LinkedList() = default; //what does this do? It initializes pHead to
 LinkedList::LinkedList(int dataInTheHeadNode)
 {
     pHead = new Node(dataInTheHeadNode, nullptr);
+
+    //the new node is the ONLY node (it is both head AND tail)
+    pTail = pHead;
 }
 
 void LinkedList::pushFront(int newData)
 {
     Node* pNew = new Node(newData, nullptr);
 
+    //handle edge case first: list is EMPTY when calling this function
+    if (pHead == nullptr)
+    {
+        pHead = pNew;
+        pTail = pNew;
+        return; //go no further
+    }
+
+    //"non-edge case"
     pNew->pNext = pHead;
     pHead = pNew;
-
-    //does pTail need to be updated? (yes)
 }
 
 void LinkedList::pushBack(int newData)
@@ -40,6 +50,8 @@ void LinkedList::pushBack(int newData)
     Node* pNew = new Node(newData, nullptr);
 
     pTail->pNext = pNew;
+
+    pTail = pNew;
 
     // if (pHead == nullptr) //what if the list is empty? Without this if, nullptr gets dereferenced below
     // {
@@ -61,6 +73,23 @@ void LinkedList::pushBack(int newData)
     // pCurrent->pNext = pNew;
 }
 
+void LinkedList::popFront()
+{
+    if (pHead == nullptr)
+    {
+        std::cout << "Cannot pop empty list!" << std::endl;
+        return;
+    }
+
+    pHead = pHead->pNext;
+
+    //Should pTail be updated? What if pHead is the ONLY node in the list now?
+    if (pHead->pNext == nullptr)
+    {
+        pTail = pHead; //is this necessary?
+    }
+}
+
 void LinkedList::traverse() const
 {
     //for an array:
@@ -77,7 +106,7 @@ void LinkedList::traverse() const
 
     while (pCurrent != nullptr)
     {
-        std::cout << "contents of current node are: " << (char)pCurrent->data << std::endl;
+        std::cout << pCurrent->data << std::endl;
         //DrawRectangle(0, 100, ...); //use RayLib dependency to draw boxes for nodes?
 
         //advance

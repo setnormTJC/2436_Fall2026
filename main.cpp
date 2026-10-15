@@ -40,24 +40,24 @@ void answerLinkedListQuizQuestions()
 
 int main()
 {
-    // LinkedList emptyList;
+    LinkedList linkedList(99); //'c' = 99
 
-    // answerLinkedListQuizQuestions();
 
-    LinkedList linkedList; //a is initially at head of list (only contains one node)
-    linkedList.pushBack('e');
+    linkedList.pushBack(100);
 
-    linkedList.pushFront('b');  //put b in front of a
+    linkedList.pushFront(98);
 
-    linkedList.pushFront('a'); //put c in front of b
-    //last time, we stopped here
+    linkedList.pushFront(97);
 
-    linkedList.pushBack('d'); //insert in REAR!
+    linkedList.pushBack(101);
+
+    linkedList.popFront();
+    linkedList.popFront();
+    linkedList.popFront();
+    linkedList.popFront();//leaves ONLY 101
+    linkedList.popFront();
 
     linkedList.traverse();//ex: print data in all nodes in list
-
-    //what functionality SHOULD exist for a singly-linked list?
-
 
      /******************************Smart pointer-based linked list demos*************************/
     // SmartLinkedList smartLinkedList(97); //97

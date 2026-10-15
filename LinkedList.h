@@ -40,6 +40,7 @@ private:
     Node* pHead = nullptr;
     //why not also store pTail?
     Node *pTail = nullptr;
+    //adding this requires "extra" (auxillary) space for a singly-linked list, but reduces time complexity of pushBack
 
 public:
     LinkedList();
@@ -50,9 +51,8 @@ public:
     ///@brief insert newData into the REAR/TAIL node of the list
     void pushBack(int newData);
 
-    ///@brief queue needs popFront
-    void popFront(); 
-
+    ///@brief (single-ended) queue needs popFront (FIFO)
+    void popFront(); //remove first element from queue
 
     void traverse() const; //mark as constant because pHead will NOT be changed by this algo.
 
