@@ -6,6 +6,8 @@
 
 #include <iostream>
 
+#include "raylib.h"
+
 
 Node::Node() = default; //what does this do? (it sets pointers to nullptr 0x000...000 (16 zeros if in 64 bit app)
 Node::Node(int dataOfInterest, Node *pNext)
@@ -30,7 +32,33 @@ void LinkedList::pushFront(int newData)
     pNew->pNext = pHead;
     pHead = pNew;
 
+    //does pTail need to be updated? (yes)
+}
 
+void LinkedList::pushBack(int newData)
+{
+    Node* pNew = new Node(newData, nullptr);
+
+    pTail->pNext = pNew;
+
+    // if (pHead == nullptr) //what if the list is empty? Without this if, nullptr gets dereferenced below
+    // {
+    //     pushFront(newData);
+    //     return; //go no further (Gandalf you shall not pass)
+    // }
+    //
+    // Node* pCurrent = pHead;
+    //
+    // //move pCurrent along until we get to the end of the list
+    // while (pCurrent->pNext != nullptr) //caution! what happens here if the list is empty?
+    // {
+    //     pCurrent = pCurrent->pNext; //analogous to ++i for array traversal
+    // }
+    //
+    // //make new node and update pCurrent's pNext to pNew
+    // Node* pNew = new Node(newData, nullptr);
+    //
+    // pCurrent->pNext = pNew;
 }
 
 void LinkedList::traverse() const
@@ -50,8 +78,11 @@ void LinkedList::traverse() const
     while (pCurrent != nullptr)
     {
         std::cout << "contents of current node are: " << (char)pCurrent->data << std::endl;
+        //DrawRectangle(0, 100, ...); //use RayLib dependency to draw boxes for nodes?
+
         //advance
         pCurrent = pCurrent->pNext; //step forward (analogous to index = index + 1 in array traversal algo)
+
     }
 
 }
@@ -63,6 +94,28 @@ private:
 };
 
 //initializes integers to 0 (and bools to false, etc.)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 SmartPointerNode::SmartPointerNode() = default;

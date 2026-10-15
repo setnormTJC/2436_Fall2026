@@ -2,12 +2,13 @@
 
 #include "LinkedList.h"
 #include "MyStack.h"
-
+//#include<>
+#include"cmake-build-debug/_deps/raylib-build/raylib/include/raylib.h"
 #include<string>
 
 void answerLinkedListQuizQuestions()
 {
-    //
+    //119 is the decimal equivalent of the character 'w'
     Node* pHead = new Node(119, nullptr); //new "goes to the OS and begs for some extra memory"
 
     Node* pSecond = new Node('t', nullptr);
@@ -43,11 +44,15 @@ int main()
 
     // answerLinkedListQuizQuestions();
 
-    LinkedList linkedList('a'); //a is initially at head of list (only contains one node)
+    LinkedList linkedList; //a is initially at head of list (only contains one node)
+    linkedList.pushBack('e');
 
     linkedList.pushFront('b');  //put b in front of a
 
-    linkedList.pushFront('c'); //put c in front of b
+    linkedList.pushFront('a'); //put c in front of b
+    //last time, we stopped here
+
+    linkedList.pushBack('d'); //insert in REAR!
 
     linkedList.traverse();//ex: print data in all nodes in list
 

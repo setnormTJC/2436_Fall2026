@@ -21,7 +21,7 @@ class Node
 {
     //private:
 public:
-    int data = 0;
+    int data = 0; //
     Node* pNext = nullptr; //a node is defined in terms of itself
 
     friend class LinkedList; //recall from last semester -> friends can modify and read PRIVATE member variables
@@ -39,15 +39,55 @@ class LinkedList
 private:
     Node* pHead = nullptr;
     //why not also store pTail?
+    Node *pTail = nullptr;
 
 public:
     LinkedList();
     LinkedList(int dataInTheHeadNode);
 
+    ///@brief inserts newData into the HEAD node of the list
     void pushFront(int newData);
+    ///@brief insert newData into the REAR/TAIL node of the list
+    void pushBack(int newData);
+
+    ///@brief queue needs popFront
+    void popFront(); 
+
 
     void traverse() const; //mark as constant because pHead will NOT be changed by this algo.
+
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ///@brief This is a SINGLY-linked node (not a doubly-linked node)
 class SmartPointerNode
