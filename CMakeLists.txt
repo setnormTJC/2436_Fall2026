@@ -43,7 +43,9 @@ add_executable(2436_Fall2026 main.cpp
         MyStack.cpp
         MyStack.h
         LinkedList.cpp
-        LinkedList.h)
+        LinkedList.h
+        QueueAbstractDataType.cpp
+        QueueAbstractDataType.h)
 
 target_link_libraries(2436_Fall2026
     2436 #a repo/project from a class that I teach

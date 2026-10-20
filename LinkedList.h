@@ -8,19 +8,13 @@
 #include<memory> //for std::unique_ptr (a "smart" pointer that does not allow memory leaks)
 
 
-///example of "typical" classes we've built
-class Car
-{
-    std::string make = "Ford";
-    int mileCount = 123'456;
-    //Car someCar; //no good
-};
+
 
 ///@brief This is a "self-referential" class
 class Node
 {
-    //private:
-public:
+    private:
+//public:
     int data = 0; //
     Node* pNext = nullptr; //a node is defined in terms of itself
 

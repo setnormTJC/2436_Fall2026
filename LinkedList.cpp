@@ -18,7 +18,7 @@ pNext(pNext)
 
 }
 
-LinkedList::LinkedList() = default; //what does this do? It initializes pHead to nullptr
+LinkedList::LinkedList() = default; //what does this do? It initializes pHead and pTail to nullptr
 
 LinkedList::LinkedList(int dataInTheHeadNode)
 {
