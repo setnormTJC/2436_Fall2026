@@ -5,13 +5,13 @@
 #include "QueueAbstractDataType.h"
 
 QueueImplementedWithLinkedList::QueueImplementedWithLinkedList() = default; //what does default do here?
-QueueImplementedWithLinkedList::QueueImplementedWithLinkedList(int newValue)
+QueueImplementedWithLinkedList::QueueImplementedWithLinkedList(const std::string& newValue)
     :
 linkedList(newValue) //calls the parameterized constructor of LinkedList class
 {
 }
 
-void QueueImplementedWithLinkedList::pushBack(int newValue)
+void QueueImplementedWithLinkedList::pushBack(const std::string& newValue)
 {
     linkedList.pushBack(newValue); //again, the complexity of this operation is constant! (O(1))
 }

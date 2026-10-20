@@ -9,104 +9,17 @@
 #include "raylib.h"
 
 
-Node::Node() = default; //what does this do? (it sets pointers to nullptr 0x000...000 (16 zeros if in 64 bit app)
-Node::Node(int dataOfInterest, Node *pNext)
-    :
-data(dataOfInterest),
-pNext(pNext)
-{
 
-}
 
-LinkedList::LinkedList() = default; //what does this do? It initializes pHead and pTail to nullptr
 
-LinkedList::LinkedList(int dataInTheHeadNode)
-{
-    pHead = new Node(dataInTheHeadNode, nullptr);
 
-    //the new node is the ONLY node (it is both head AND tail)
-    pTail = pHead;
-}
 
-void LinkedList::pushFront(int newData)
-{
-    Node* pNew = new Node(newData, nullptr);
 
-    //handle edge case first: list is EMPTY when calling this function
-    if (pHead == nullptr)
-    {
-        pHead = pNew;
-        pTail = pNew;
-        return; //go no further
-    }
 
-    //"non-edge case"
-    pNew->pNext = pHead;
-    pHead = pNew;
-}
 
-void LinkedList::pushBack(int newData)
-{
-    Node* pNew = new Node(newData, nullptr);
 
-    if (pHead == nullptr)
-    {
-        pHead = pNew;
-        pTail = pNew;
-        return;
-    }
 
-    pTail->pNext = pNew;
 
-    pTail = pNew;
-
-}
-
-void LinkedList::popFront()
-{
-    //NOTA BENE: since we are using raw pointers and the NEW operator, delete should be used here
-    //(but isn't for the sake of "simplicity")
-    if (pHead == nullptr)
-    {
-        std::cout << "Cannot pop empty list!" << std::endl;
-        return;
-    }
-
-    //Should pTail be updated? What if pHead is the ONLY node in the list when this function is called?
-    if (pHead->pNext == nullptr)
-    {
-        pTail = nullptr;
-    }
-
-    pHead = pHead->pNext;
-
-}
-
-void LinkedList::traverse() const
-{
-    //for an array:
-    //for (int index = 0; index < arrayName.size(); ++index)
-    //print arrayName[index]
-
-    Node* pCurrent = pHead;
-
-    while (pCurrent != nullptr)
-    {
-        std::cout << pCurrent->data << std::endl;
-        //DrawRectangle(0, 100, ...); //use RayLib dependency to draw boxes for nodes?
-
-        //advance
-        pCurrent = pCurrent->pNext; //step forward (analogous to index = index + 1 in array traversal algo)
-
-    }
-
-}
-
-class Queue
-{
-private:
-    LinkedList linkedList; //why use a linked list? BECAUSE "fast" (O(1)) insertion at ... we'll talk about
-};
 
 //initializes integers to 0 (and bools to false, etc.)
 

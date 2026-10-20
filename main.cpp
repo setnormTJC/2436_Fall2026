@@ -22,6 +22,13 @@ void printQueue(std::queue<std::string> queue)//pass by value!
 
 int main()
 {
+    LinkedList<std::string> linkedList("Bob");
+    linkedList.pushBack("Alice");
+
+    linkedList.pushBack("Carol");
+
+    //LinkedList<std::string> linkedList("Alice");
+
     // std::queue<std::string> customersInLine;
     // customersInLine.push("Alice");
     // customersInLine.push("Bob");
@@ -29,11 +36,11 @@ int main()
     //
     // printQueue(customersInLine);
 
-    QueueImplementedWithLinkedList queue('A');
+    QueueImplementedWithLinkedList queue("Alice");
 
-    queue.pushBack('B');
+    queue.pushBack("Bob");
 
-    queue.pushBack('C');
+    queue.pushBack("Carol");
 
     queue.traverse();
 

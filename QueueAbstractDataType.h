@@ -14,7 +14,7 @@ class QueueAbstractDataType
 {
 public:
     //virtual means "can be overridden" by children classes
-    virtual void pushBack(int newValue) = 0; //const -> immutable (cannot change)
+    virtual void pushBack(const std::string& newValue) = 0; //const -> immutable (cannot change)
 
     virtual void popFront() = 0;
 
@@ -26,13 +26,13 @@ class QueueImplementedWithLinkedList : public QueueAbstractDataType
 {
 private:
     //composition! returns! ftw (for the win)
-    LinkedList linkedList;
+    LinkedList<std::string> linkedList; //NOTE the template param here
 
 public:
     QueueImplementedWithLinkedList();
-    QueueImplementedWithLinkedList(int newValue);
+    QueueImplementedWithLinkedList(const std::string& newValue);
 
-    void pushBack(int newValue) override;
+    void pushBack(const std::string& newValue) override;
     void popFront() override;
 
     void traverse();

@@ -5,61 +5,132 @@
 #ifndef INC_2436_FALL2026_LINKEDLIST_H
 #define INC_2436_FALL2026_LINKEDLIST_H
 
+#include <iostream>
 #include<memory> //for std::unique_ptr (a "smart" pointer that does not allow memory leaks)
 
-
-
+template <typename T>
+class LinkedList; //this is a "forward declaration"
 
 ///@brief This is a "self-referential" class
+template<typename T>
 class Node
 {
     private:
-//public:
-    int data = 0; //
+    T data{}; //braces default initialize whatever data type T is (including complex data types - ex: class Car)
     Node* pNext = nullptr; //a node is defined in terms of itself
 
-    friend class LinkedList; //recall from last semester -> friends can modify and read PRIVATE member variables
-
+    friend class LinkedList<T>; //need for template?
+    //friend class LinkedList;
 public:
-    Node();
-    Node(int dataOfInterest, Node* pNext);
+    Node() = default;
+    Node(T dataOfInterest, Node* pNext)
+    :
+    data(dataOfInterest),
+    pNext(pNext)
+    {
+
+    }
 };
 
 ///@brief Nota bene: for simplicity, this uses raw pointers, new operator, and has memory leaks
-class LinkedList
+template<typename T>
+class LinkedList //redefinition error due to friend class declaration above
 {
     //let's fill this up with member variable (single)
     //and functions (ex: traverse, insert, etc.)
 private:
-    Node* pHead = nullptr;
+    Node<T>* pHead = nullptr;
     //why not also store pTail?
-    Node *pTail = nullptr;
+    Node<T> *pTail = nullptr;
     //adding this requires "extra" (auxillary) space for a singly-linked list, but reduces time complexity of pushBack
 
 public:
-    LinkedList();
-    LinkedList(int dataInTheHeadNode);
+    LinkedList() = default;
+    LinkedList(T dataInTheHeadNode)
+    {
+        pHead = new Node<T>(dataInTheHeadNode, nullptr);
+
+        //the new node is the ONLY node (it is both head AND tail)
+        pTail = pHead;
+    }
 
     ///@brief inserts newData into the HEAD node of the list <br>
     ///complexity is O(1)
-    void pushFront(int newData);
+    void pushFront(T newData)
+    {
+        Node<T>* pNew = new Node<T>(newData, nullptr);
+
+        //handle edge case first: list is EMPTY when calling this function
+        if (pHead == nullptr)
+        {
+            pHead = pNew;
+            pTail = pNew;
+            return; //go no further
+        }
+
+        //"non-edge case"
+        pNew->pNext = pHead;
+        pHead = pNew;
+    }
 
     ///@brief insert newData into the REAR/TAIL node of the list<br>
     ///complexity is O(1)
-    void pushBack(int newData);
+    void pushBack(T newData)
+    {
+        Node<T>* pNew = new Node<T>(newData, nullptr);
+
+        if (pHead == nullptr)
+        {
+            pHead = pNew;
+            pTail = pNew;
+            return;
+        }
+
+        pTail->pNext = pNew;
+
+        pTail = pNew;
+
+    }
 
     ///@brief (single-ended) queue needs popFront (FIFO)<br>
     ///complexity is O(1)
-    void popFront();
+    void popFront()
+    {
+        //NOTA BENE: since we are using raw pointers and the NEW operator, delete should be used here
+        //(but isn't for the sake of "simplicity")
+        if (pHead == nullptr)
+        {
+            std::cout << "Cannot pop empty list!" << std::endl;
+            return;
+        }
+
+        //Should pTail be updated? What if pHead is the ONLY node in the list when this function is called?
+        if (pHead->pNext == nullptr)
+        {
+            pTail = nullptr;
+        }
+
+        pHead = pHead->pNext;
+
+    }
 
     ///complexity is O(N)
-    void traverse() const; //mark as constant because pHead will NOT be changed by this algo.
+    void traverse() const //mark as constant because pHead and pTail will NOT be changed by this algo.
+    {
+        //for an array:
+        //for (int index = 0; index < arrayName.size(); ++index)
+        //print arrayName[index]
 
+        Node<T>* pCurrent = pHead;
+
+        while (pCurrent != nullptr)
+        {
+            std::cout << pCurrent->data << std::endl;
+            //advance to next node
+            pCurrent = pCurrent->pNext; //step forward (analogous to index = index + 1 in array traversal algo)
+        }
+    }
 };
-
-
-
-
 
 
 
