@@ -5,6 +5,7 @@
 #ifndef INC_2436_FALL2026_QUEUEABSTRACTDATATYPE_H
 #define INC_2436_FALL2026_QUEUEABSTRACTDATATYPE_H
 #include <string>
+#include<vector>
 
 #include "LinkedList.h"
 
@@ -16,7 +17,7 @@ public:
     //virtual means "can be overridden" by children classes
     virtual void pushBack(const std::string& newValue) = 0; //const -> immutable (cannot change)
 
-    virtual void popFront() = 0;
+    virtual void popFront() = 0; //FIFO
 
 };
 
@@ -32,6 +33,7 @@ public:
     QueueImplementedWithLinkedList();
     QueueImplementedWithLinkedList(const std::string& newValue);
 
+    ///@brief O(1) complexity
     void pushBack(const std::string& newValue) override;
     void popFront() override;
 
@@ -41,9 +43,18 @@ public:
 
 
 ///@brief tricky -> uses a "circular" buffer/array
-class QueueImplementedWithACStyleArray : public QueueAbstractDataType
+class QueueImplementedWithAVector : public QueueAbstractDataType
 {
+private:
+    std::vector<std::string> vector;//"underlying implementation/data structure"
+    //variables that are useful for a clever (circular buffer) approach:
+    int first, last; //indices of first and last elements in the array (first is not always ZERO???)
+public:
+    QueueImplementedWithAVector();
 
+    void pushBack(const std::string& newValue) override;
+    void popFront() override;
+    void traverse();
 };
 
 

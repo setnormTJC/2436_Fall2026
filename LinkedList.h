@@ -79,6 +79,8 @@ public:
     {
         Node<T>* pNew = new Node<T>(newData, nullptr);
 
+        Node<T>* pCurrent = pHead;
+
         if (pHead == nullptr)
         {
             pHead = pNew;

@@ -3,6 +3,7 @@
 #include "LinkedList.h"
 #include "MyStack.h"
 #include"cmake-build-debug/_deps/raylib-build/raylib/include/raylib.h"
+#include<deque> //double-ended queue
 #include<string>
 #include<chrono>
 #include<thread>
@@ -22,31 +23,17 @@ void printQueue(std::queue<std::string> queue)//pass by value!
 
 int main()
 {
-    LinkedList<std::string> linkedList("Bob");
-    linkedList.pushBack("Alice");
+    QueueImplementedWithAVector queue;
 
-    linkedList.pushBack("Carol");
+    //QueueImplementedWithAVector queue("Bob");
 
-    //LinkedList<std::string> linkedList("Alice");
-
-    // std::queue<std::string> customersInLine;
-    // customersInLine.push("Alice");
-    // customersInLine.push("Bob");
-    // customersInLine.push("Carol");
-    //
-    // printQueue(customersInLine);
-
-    QueueImplementedWithLinkedList queue("Alice");
-
-    queue.pushBack("Bob");
+    queue.pushBack("Alice");
 
     queue.pushBack("Carol");
 
-    queue.traverse();
+    queue.popFront();
 
-    // queue.popFront(); //remove Alice
-    // queue.popFront(); //remove Bob
-    // queue.popFront(); //remove Carol
+    queue.traverse();
 
     return 0;
 }
