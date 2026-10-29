@@ -45,7 +45,10 @@ add_executable(2436_Fall2026 main.cpp
         LinkedList.cpp
         LinkedList.h
         QueueAbstractDataType.cpp
-        QueueAbstractDataType.h)
+        QueueAbstractDataType.h
+        Demos.h
+        Customer.cpp
+        Customer.h)
 
 target_link_libraries(2436_Fall2026
     2436 #a repo/project from a class that I teach

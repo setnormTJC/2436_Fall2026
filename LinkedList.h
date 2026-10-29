@@ -74,7 +74,7 @@ public:
     }
 
     ///@brief insert newData into the REAR/TAIL node of the list<br>
-    ///complexity is O(1)
+    ///complexity is O(1) -> constant, terrific!
     void pushBack(T newData)
     {
         Node<T>* pNew = new Node<T>(newData, nullptr);
