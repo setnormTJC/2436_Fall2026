@@ -12,6 +12,7 @@ class Customer
 public:
     std::string name;
     int numberOfItems = 0;
+    //no more detail here, just a simple demo class
 };
 
 

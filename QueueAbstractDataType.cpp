@@ -71,12 +71,12 @@ QueueImplementedWithCircularArray::QueueImplementedWithCircularArray() = default
 
 QueueImplementedWithCircularArray::QueueImplementedWithCircularArray(const QueueImplementedWithCircularArray &other)
 {
-    std::string copy[MAX_SIZE];
-
-    for (int i = 0; i < MAX_SIZE - 1; ++i)
-    {
-        copy[i] = other.cStyleArray[i]; //NOTE the other.
-    }
+    // std::string copy[MAX_SIZE];
+    //
+    // for (int i = 0; i < MAX_SIZE - 1; ++i)
+    // {
+    //     copy[i] = other.cStyleArray[i]; //NOTE the other.
+    // }
 }
 
 void QueueImplementedWithCircularArray::pushBack(const std::string &newValue)

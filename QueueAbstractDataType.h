@@ -69,6 +69,7 @@ class QueueImplementedWithCircularArray : public QueueAbstractDataType
 
 public:
     QueueImplementedWithCircularArray();
+    ///@brief this is a "copy constructor"
     QueueImplementedWithCircularArray(const QueueImplementedWithCircularArray& other);
 
     void pushBack(const std::string& newValue) override;

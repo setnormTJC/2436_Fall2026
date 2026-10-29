@@ -47,29 +47,38 @@ void simulateCheckoutLane(std::deque<Customer>& customers)
     }
 }
 
+
+class Process
+{
+public:
+    std::string name;
+    int priority = 0; //how important is this task? higher number means higher priority
+
+    //the part I was failing to remember at the end of last lecture (Oct. 29)
+    bool operator < (const Process& other) const
+    {
+        return this->priority < other.priority;
+    }
+
+};
+
 int main()
 {
-    // // Demos::demoCircularStaticQueueAlgos();
-    //
-    std::deque<Customer> customers; //customers in line at a grocery store
-    //
-    //customers.push_back({"Alice", 1});
-    customers.push_back(Customer("Alice", 1));
-    customers.push_back(Customer("Bob", 2));
-    customers.push_back(Customer("Carol", 3));
-    //
-    Customer someCustomer = {"Very important person", 12};
-    if (someCustomer.name == "Very important person")
-    {
-         customers.push_front(someCustomer);
-    }
-    //
-    else
-    {
-         customers.push_back(someCustomer);
-    }
-    //
-    simulateCheckoutLane(customers);
+    // Demos::demoCircularStaticQueueAlgos();
 
+    //a smarter, simpler intro to priority_queue
+    std::priority_queue<int> nums;
+    nums.push(1);
+    nums.push(11);
+    nums.push(-233);
+
+    //what I was doing last time:
+    std::priority_queue<Process> priorityQueue;
+
+    Process firstProcess("A", 1);
+    priorityQueue.push(firstProcess);
+
+    //add another process with higher priority:
+    priorityQueue.push({"B", 23});
 
 }
