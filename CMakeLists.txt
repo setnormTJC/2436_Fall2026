@@ -48,7 +48,9 @@ add_executable(2436_Fall2026 main.cpp
         QueueAbstractDataType.h
         Demos.h
         Customer.cpp
-        Customer.h)
+        Customer.h
+        StringWrapper.cpp
+        StringWrapper.h)
 
 target_link_libraries(2436_Fall2026
     2436 #a repo/project from a class that I teach
