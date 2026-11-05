@@ -1,5 +1,6 @@
+#include <algorithm>
 #include <iostream>
-#include<queue>
+#include<queue> //gives access to queue, deque, priority queue
 #include <memory>
 
 #include"Customer.h"
@@ -47,38 +48,70 @@ void simulateCheckoutLane(std::deque<Customer>& customers)
     }
 }
 
-
 class Process
 {
 public:
-    std::string name;
-    int priority = 0; //how important is this task? higher number means higher priority
+    std::string id; //leave it as the empty string
+    int priority = 0; //higher number means greater priority
 
-    //the part I was failing to remember at the end of last lecture (Oct. 29)
-    bool operator < (const Process& other) const
-    {
-        return this->priority < other.priority;
-    }
-
+    ///@brief compares processes by their priority (not by their id)
+     bool operator < (const Process& rightHandSideProcess) const
+     {
+         if (this->priority < rightHandSideProcess.priority)
+         {
+             return true;
+         }
+         else
+         {
+             return false;
+         }
+     }
 };
+
 
 int main()
 {
-    // Demos::demoCircularStaticQueueAlgos();
+    std::vector<Process> processes;
 
-    //a smarter, simpler intro to priority_queue
-    std::priority_queue<int> nums;
-    nums.push(1);
-    nums.push(11);
-    nums.push(-233);
+    processes.push_back({"A", 1});
+    processes.push_back({"B", 22});
+    processes.push_back({"C", 3});
 
-    //what I was doing last time:
+    std::sort(processes.begin(), processes.end());
+
     std::priority_queue<Process> priorityQueue;
 
-    Process firstProcess("A", 1);
+    Process firstProcess = {"A", 2};
+
     priorityQueue.push(firstProcess);
 
-    //add another process with higher priority:
-    priorityQueue.push({"B", 23});
+    priorityQueue.push({"B", 3});
+
+    // std::priority_queue<int> priorityQueue;
+    //
+    // priorityQueue.push(1);
+    // priorityQueue.push(-1);
+    // priorityQueue.push(3);
+    //
+    // int dummyBreakPointVariable = 123;
+    //
+    // priorityQueue.pop();
+
+    // // Demos::demoCircularStaticQueueAlgos();
+    //
+    // //a smarter, simpler intro to priority_queue
+    // std::priority_queue<int> nums;
+    // nums.push(1);
+    // nums.push(11);
+    // nums.push(-233);
+    //
+    // //what I was doing last time:
+    // std::priority_queue<Process> priorityQueue;
+    //
+    // Process firstProcess("A", 1);
+    // priorityQueue.push(firstProcess);
+    //
+    // //add another process with higher priority:
+    // priorityQueue.push({"B", 23});
 
 }
