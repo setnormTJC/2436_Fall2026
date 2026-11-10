@@ -16,12 +16,12 @@ class StringWrapper
 {
 private:
     ///@brief mString as in "member variable" string (this is called "Hungarian notation")
-    std::string mString;
+    std::string mString; //""
 
 public:
     StringWrapper();
 
-    //StringWrapper(const std::string& baseString);
+    // StringWrapper(const std::string& baseString);
 
     ///@param filename -> the file with which to construct the string <br>
     ///the private member variable <code>mString</code> gets filled with the content of the entire file
@@ -32,6 +32,8 @@ public:
     std::string encrypt() const;
 
     std::map<char, int> getLetterFrequencyDistribution() const; //not going to modifiy mString
+
+    void printHistogram(const std::map<char, int>& letterFrequencyDistribution) const;
 };
 
 

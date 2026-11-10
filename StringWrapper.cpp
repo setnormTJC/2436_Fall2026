@@ -26,8 +26,8 @@ std::string StringWrapper::encrypt() const
 
     //int randomKey = distribution.operator()(rng); //the uniform_int_distribution class overloads ()
     int randomKey = distribution(rng);
-    std::cout << "Random encryption key is: " << randomKey << std::endl;
 
+    std::cout << "Random encryption key is: " << randomKey << std::endl;
 
     std::string encryptedText; //""  empty string initially
 
@@ -59,9 +59,42 @@ std::map<char, int> StringWrapper::getLetterFrequencyDistribution() const
         lettersToFrequencies[currentChar]++;
     }//end for
 
-
-
     return lettersToFrequencies;
+}
+
+void StringWrapper::printHistogram(const std::map<char, int> &letterFrequencyDistribution) const
+{
+    //asdfasdf
+    for (const auto& currentPair : letterFrequencyDistribution)
+    {
+        std::cout << currentPair.first << " occurs this many times: " << currentPair.second << std::endl;
+    }
+
+    //scaling factor is to make sure the histogram formatting is "nice"
+    int SCALING_FACTOR = INT_MAX; //I got this value just by scanning the particular 25K lexicon file!
+
+    //SCALING_FACTOR = 1;
+
+    //find MINIMUM key (pair.second) in the map
+    for (const auto& currentPair : letterFrequencyDistribution)
+    {
+        if (currentPair.second < SCALING_FACTOR)
+        {
+            SCALING_FACTOR = currentPair.second;
+        }
+    }
+
+    for (const auto& currentPair : letterFrequencyDistribution)
+    {
+        int scaledNumberOfOccurrences = currentPair.second/SCALING_FACTOR;
+        std::cout << currentPair.first << ": ";
+        //nested loop!
+        for (int i = 0; i < scaledNumberOfOccurrences; ++i)
+        {
+            std::cout << "*";
+        }
+        std::cout << std::endl; //ex: a: 5 -> *****
+    }
 }
 
 StringWrapper::StringWrapper() = default; //sets mString = ""
