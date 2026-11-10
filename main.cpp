@@ -4,25 +4,19 @@
 
 #include"StringWrapper.h"
 
+#include<queue>
+
+
 int main()
 {
-    // const std::string filename ="../resources/prideAndPrejudiceSample.txt";
-    //
-    // StringWrapper stringWrapper(filename);
 
+    const std::string filename ="../resources/25Klexicon.txt";
 
-    std::string plaintext = "aaabbb"; //we expect something like cccddd or zzz{{{
+    StringWrapper stringWrapper(filename);
 
-    StringWrapper stringWrapper(plaintext);
-
-    std::string cipherText = stringWrapper.encrypt();
-
-    //std::cout << "Ciphertext is: " << cipherText << std::endl;
+    // std::string cipherText = stringWrapper.encrypt(); //we'll continue this next time
 
     auto lettersToFrequencies = stringWrapper.getLetterFrequencyDistribution();
-
-
-
 
 
 }

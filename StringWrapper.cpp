@@ -42,13 +42,24 @@ std::string StringWrapper::encrypt() const
 
 std::map<char, int> StringWrapper::getLetterFrequencyDistribution() const
 {
-    std::map<char, int> lettersToFrequencies =
-    {
-        {'a', 3},
-        {'b', 3}
-    };
+    std::map<char, int> lettersToFrequencies;// =
+    // {
+    //     {'a', 3},
+    //     {'b', 3}
+    // };
+    //
+    // lettersToFrequencies['a']++;
 
-    lettersToFrequencies['a']++;
+    std::cout << "Number of characters in those 25K words is: " << mString.size() << std::endl;
+
+    for (int i = 0; i < mString.size(); ++i)
+    {
+        char currentChar = mString[i];
+
+        lettersToFrequencies[currentChar]++;
+    }//end for
+
+
 
     return lettersToFrequencies;
 }
