@@ -1,51 +1,19 @@
-#include <iostream>
 
-
-
-#include"StringWrapper.h"
-
-#include<queue>
-
-
-std::map<char, int> getHistogram(const std::string& theString)
-{
-    std::map<char, int> histogram;
-
-    for (int i = 0; i < theString.size(); ++i)
-    {
-        char currentCharacter = theString[i];
-        histogram[currentCharacter]++; //adds one to the number of occurrences of the current character
-    }
-
-
-    return histogram;
-}
-
+#include "BinaryTree.h"
 
 int main()
 {
+    BinaryTree binaryTree('a');
 
-    std::string filename ="../resources/prideAndPrejudiceSample.txt";
-    //std::pair<std::string, int> personToAge = {"Chase", 28};
+    binaryTree.addData('b');
 
-    filename = "../resources/25Klexicon.txt";
+    binaryTree.addData('c');
+    binaryTree.addData('d');
+    binaryTree.addData('e');
 
-    StringWrapper stringWrapper(filename);
+    Node* pRoot = binaryTree.getPRoot();
 
-    // std::string cipherText = stringWrapper.encrypt(); //we'll continue this next time
+    binaryTree.print(pRoot);
 
-    auto lettersToFrequencies = stringWrapper.getLetterFrequencyDistribution();
-
-    //int dummyBreakPoint = 123;
-
-    stringWrapper.printHistogram(lettersToFrequencies);
-    //
-    //std::string encryptedText = stringWrapper.encrypt();
-    //
-    //std::cout << encryptedText << std::endl;
-
-    //auto histogram = getHistogram();
-
-    //stringWrapper.printHistogram(histogram);
-
+    // binaryTree.depthFirstTraverse();
 }

@@ -50,7 +50,9 @@ add_executable(2436_Fall2026 main.cpp
         Customer.cpp
         Customer.h
         StringWrapper.cpp
-        StringWrapper.h)
+        StringWrapper.h
+        BinaryTree.cpp
+        BinaryTree.h)
 
 target_link_libraries(2436_Fall2026
     2436 #a repo/project from a class that I teach
